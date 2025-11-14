@@ -1,0 +1,18 @@
+* text=auto eol=lf
+
+*.jar binary
+*.war binary
+*.zip binary
+*.onnx binary
+*.pt binary
+*.x_t binary
+*.x_b binary
+*.stp binary
+*.step binary
+*.pcd binary
+
+generated/** -diff
+**/generated-sources/** -diff
+
+gradlew text eol=lf
+gradlew.bat text eol=crlf

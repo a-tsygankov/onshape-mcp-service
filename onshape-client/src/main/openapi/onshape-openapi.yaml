@@ -1,0 +1,83 @@
+openapi: 3.0.3
+info:
+  title: Onshape Client Stub
+  version: 0.0.1
+servers:
+  - url: http://localhost:8081/api
+paths:
+  /documents:
+    get:
+      operationId: listDocuments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentSummary'
+  /workspaces:
+    get:
+      operationId: listWorkspaces
+      parameters:
+        - in: query
+          name: documentId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkspaceSummary'
+  /elements:
+    get:
+      operationId: listElements
+      parameters:
+        - in: query
+          name: documentId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: workspaceId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ElementSummary'
+components:
+  schemas:
+    DocumentSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    WorkspaceSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    ElementSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string

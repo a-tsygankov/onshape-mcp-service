@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+
+onshape:
+  base-url: "http://localhost:8081" # adjust to your local Onshape dev port
+  api-key: "ONSHAPE_API_KEY_PLACEHOLDER"
+
+qdrant:
+  url: "http://localhost:6333"
+
+embedding:
+  model-path: "./models/shape-embed.onnx"

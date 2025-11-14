@@ -1,0 +1,11 @@
+# Docker ignore
+.gradle/
+build/
+*/build/
+**/generated-sources/
+models/
+*.onnx
+data/
+exports/
+tmp/
+temp/

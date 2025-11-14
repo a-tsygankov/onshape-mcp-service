@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.9.2
+    container_name: qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  init-qdrant:
+    image: curlimages/curl:8.7.1
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    entrypoint: >
+      sh -c "
+        echo 'Initializing Qdrant collection...';
+        curl -X PUT http://qdrant:6333/collections/parts
+             -H 'Content-Type: application/json'
+             -d '{
+                   "vectors": {
+                     "size": 3,
+                     "distance": "Cosine"
+                   }
+                 }';
+        echo 'Collection initialized.';
+      "
+
+volumes:
+  qdrant_data:

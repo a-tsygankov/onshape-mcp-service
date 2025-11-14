@@ -29,9 +29,11 @@ This project is a **local-first** Spring Boot + Jetty + Qdrant + ONNX-based serv
 
 2. (Optional) Start ONNX model container:
 
-   ```bash
-   ./scripts/run-onnx-model.sh
-   ```
+[//]: # (   ```bash)
+
+[//]: # (   ./scripts/run-onnx-model.sh)
+
+[//]: # (   ```)
 
 3. Build and run the Spring Boot service:
 

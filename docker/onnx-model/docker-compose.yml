@@ -1,9 +1,9 @@
-version: "3.9"
 
 services:
   onnx-model:
-    image: mcr.microsoft.com/azureml/onnxruntime:latest
+    image: mcr.microsoft.com/onnxruntime/server:latest
+    platform: linux/arm64/v8
     container_name: onnx-model
     command: ["sleep", "infinity"]
     volumes:
-      - ./models:/models
+      - ./models:/models:rw

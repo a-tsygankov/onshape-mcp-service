@@ -1,6 +1,42 @@
 server:
   port: 8080
 
+spring:
+  application:
+    name: parasolid-service
+
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+
+logging:
+  level:
+    root: INFO
+    com.example.parasolid: DEBUG
+    org.springframework.web: INFO
+
+# ===============================
+# Embedding Engine Configuration
+# ===============================
+embedding:
+  # Path to your ONNX model file (absolute or relative)
+  model-path: "./models/shape-embed.onnx"
+
+  # Logical version of the model — used in logs and health endpoints
+  model-version: "v1"
+
+  # Size of the embedding vector your ONNX model produces
+  expected-dimensions: 256
+
+  # Number of points to normalize/pad/truncate your point cloud to
+  target-point-count: 2048
+
+  # Performs a “dummy inference” on startup for faster real requests
+  warmup-enabled: true
+
+# ===============================
+# Swagger / OpenAPI
+# ===============================
 springdoc:
   api-docs:
     enabled: true
@@ -8,12 +44,19 @@ springdoc:
     enabled: true
     path: /swagger-ui.html
 
-onshape:
-  base-url: "http://localhost:8081" # adjust to your local Onshape dev port
-  api-key: "ONSHAPE_API_KEY_PLACEHOLDER"
-
+# ===============================
+# Qdrant Configuration (if needed later)
+# ===============================
 qdrant:
-  url: "http://localhost:6333"
+  host: "localhost"
+  port: 6333
+  collection-name: "parts"
+  vector-dimension: 256
+  similarity: "cosine"
 
-embedding:
-  model-path: "./models/shape-embed.onnx"
+# ===============================
+# Custom Service Settings
+# ===============================
+geometry:
+  export-dir: "./exports"
+  cache-dir: "./data/cache"

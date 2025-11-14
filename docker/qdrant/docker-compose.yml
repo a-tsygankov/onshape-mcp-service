@@ -3,6 +3,7 @@ version: "3.9"
 services:
   qdrant:
     image: qdrant/qdrant:v1.9.2
+    platform: linux/arm64/v8
     container_name: qdrant
     ports:
       - "6333:6333"
@@ -10,10 +11,12 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:6333/"]
+#      test: ["CMD", "curl", "-f", "http://localhost:6333/"]
+      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
       interval: 5s
       timeout: 3s
       retries: 5
+      start_period: 10s
 
   init-qdrant:
     image: curlimages/curl:8.7.1
